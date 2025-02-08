@@ -69,7 +69,7 @@ OnLibreChatWSL:
             # sudo apt-get update || exit 1
             # sudo apt-get install -y build-essential libvips-dev pkg-config python3 nodejs npm || exit 1
             cd "/home/ubuntu" || { echo "Failed to change directory."; exit 1; }
-            git clone "https://github.com/dwf981/LibreChat.git" || { echo "Failed to clone repository."; exit 1; }  # Fixed quote here
+            git clone "git@github.com:dwf981/LibreChat.git" || { echo "Failed to clone repository."; exit 1; }  # Fixed quote here
             cd "/home/ubuntu/LibreChat" || { echo "Failed to change directory."; exit 1; }
             echo "Installing dependencies..."
             /usr/bin/npm install || { echo "Failed to npm install."; exit 1; }
@@ -77,12 +77,12 @@ OnLibreChatWSL:
             /usr/bin/npm ci || { echo "Failed to npm ci."; exit 1; }
             echo "Running frontend..."
             /usr/bin/npm run frontend || { echo "Failed npm run frontend."; exit 1; }
-            echo "Running backend..."
-            /usr/bin/npm run backend || { echo "Failed npm run backend."; exit 1; }
             echo "Copying .env file..."
             if [ ! -f .env ]; then cp .env.example .env; fi
             echo "Copying librechat.yaml file..."
             if [ ! -f librechat.yaml ]; then cp librechat.example.yaml librechat.yaml; fi
+            echo "Running backend..."
+            /usr/bin/npm run backend || { echo "Failed npm run backend."; exit 1; }
             echo "LibreChat installed successfully."
         fi
     )
