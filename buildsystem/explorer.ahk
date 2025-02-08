@@ -53,7 +53,7 @@ OnLibreChatWSL:
     BatchScript =
     (
         
-        echo !yellow!Initializing LibreChat in !green!%ProjectDir%!yellow! ...!nc!
+        echo !yellow!Initializing LibreChat in !green!%ProjectDirWsl%!yellow! ...!nc!
     )
     BashScript =
     (
@@ -64,6 +64,7 @@ OnLibreChatWSL:
         if [[ -f "%ProjectDirWsl%/.env" && "$should_install" == "0" ]]; then
             echo "LibreChat already installed."
             cd "%ProjectDirWsl%" || { echo "Failed to change directory."; exit 1; }
+            cmd.exe /c start "" http://localhost:3080
             /usr/bin/npm run backend || { echo "Failed to npm run backend."; exit 1; }
         else
             # sudo apt-get update || exit 1
