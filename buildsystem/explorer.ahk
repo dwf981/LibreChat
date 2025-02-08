@@ -61,7 +61,7 @@ OnLibreChatWSL:
         # Check if LibreChat is installed
         should_install=%ShiftPressed%
         
-        if [[ -f "${ProjectDirWsl}/.env" && "$should_install" == "0" ]]; then
+        if [[ -f "%ProjectDirWsl%/.env" && "$should_install" == "0" ]]; then
             echo "LibreChat already installed."
             cd "%ProjectDirWsl%" || { echo "Failed to change directory."; exit 1; }
             /usr/bin/npm run backend || { echo "Failed to npm run backend."; exit 1; }
