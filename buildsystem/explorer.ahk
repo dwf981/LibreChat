@@ -19,8 +19,7 @@
     ; Project Menu
     AddMenuItemEditor("ProjectMenu")
     AddMenu( "ProjectMenu" )
-    AddMenuItemWSLEnabled( "ProjectMenu", ProjectDir )
-    AddMenu("ProjectMenu", "En&vironment Shell...`tV", "OnEnvShell", WSLPath )
+    AddMenu( "ProjectMenu", "En&vironment Shell...`tV", "OnEnvShell", WSLPath )
     AddMenu( "ProjectMenu" )
     AddMenu( "ProjectMenu", "&README.md...`tR", "OnReadme", BrowserPath )
     AddMenu( "ProjectMenu" )
