@@ -6,7 +6,7 @@
 
     SetRegView 64
     RegRead, DeveloperDir, HKCU\Software\Developer, DeveloperDir
-    ProjectDir := GetProjectDir()
+    ProjectDir := GetProjectDir(0, -1, true)
 
     if (A_Args.Length() > 0) {
         label := A_Args[1]
@@ -37,7 +37,7 @@ MenuHandler:
 return
 
 OnSyncWithUpstream:
-    ProjectDir := GetProjectDir()
+    ProjectDir := GetProjectDir(0, -1, true)
     SyncWithUpstream(ProjectDir, "https://github.com/danny-avila/LibreChat.git")
 return
 
