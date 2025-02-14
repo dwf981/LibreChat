@@ -1,0 +1,17 @@
+---
+- name: Install dependencies, build Node project, and run index.js
+  shell: |
+    if [ ! -f "{{ repo_dest }}/.env" ]; then
+      echo "Installing dependencies ..."
+      cd "{{ repo_dest }}" || exit 1
+      pnpm install || exit 1
+      pnpm install --frozen-lockfile || exit 1
+      echo "Copying .env file..."
+      if [ ! -f .env ]; then cp .env.example .env; fi
+      echo "Copying librechat.yaml file..."
+      if [ ! -f librechat.yaml ]; then cp librechat.example.yaml librechat.yaml; fi
+      echo ""
+    fi
+  args:
+    executable: /bin/bash
+  when: true

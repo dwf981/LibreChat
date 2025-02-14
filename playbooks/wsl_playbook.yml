@@ -1,4 +1,4 @@
-# INPUT_VARIABLES: "REPO_URL"
+# INPUT_VARIABLES: "REPO_URL", "ANTHROPIC_API_KEY", "GEMINI_API_KEY", "OPENAI_API_KEY", "DEEPSEEK_API_KEY", "GROQ_API_KEY", "GH_TOKEN", "GITHUB_PERSONAL_ACCESS_TOKEN"
 ---
 - name: Install
   hosts: localhost
@@ -23,54 +23,7 @@
         dest: "{{ repo_dest }}"
         update: yes
 
-    - name: Install nvm and Node LTS version if needed
-      shell: |
-        export NVM_DIR="$HOME/.nvm"
-        # Source nvm if already installed
-        if [ -s "$NVM_DIR/nvm.sh" ]; then
-          . "$NVM_DIR/nvm.sh"
-        fi
-
-        # Install nvm if it is not available
-        if ! command -v nvm &>/dev/null; then
-          echo "nvm not found, installing nvm..."
-          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-          # Source nvm after installation
-          . "$NVM_DIR/nvm.sh"
-        fi
-
-        # Check if node is installed; if not, install LTS version
-        if ! command -v node &>/dev/null; then
-          echo "Node not found, installing LTS version of Node..."
-          nvm install --lts
-          source ~/.bashrc
-        else
-          echo "Node is already installed: $(node --version)"
-        fi
-
-        if ! command -v pnpm &>/dev/null; then
-          echo "pnpm not found, installing pnpm..."
-          npm install -g pnpm
-        else
-          echo "pnpm is already installed: $(pnpm --version)"
-        fi
-      args:
-        executable: /bin/bash
-
-    - name: Install dependencies, build Node project, and run index.js
-      shell: |
-        if [ ! -f "{{ repo_dest }}/.env" ]; then
-          echo "Installing dependencies ..."
-          cd "{{ repo_dest }}" || exit 1
-          pnpm install || exit 1
-          cd "{{ repo_dest }}" || exit 1
-          pnpm install --frozen-lockfile || exit 1
-          echo "Copying .env file..."
-          if [ ! -f .env ]; then cp .env.example .env; fi
-          echo "Copying librechat.yaml file..."
-          if [ ! -f librechat.yaml ]; then cp librechat.example.yaml librechat.yaml; fi
-          echo ""
-        fi
-      args:
-        executable: /bin/bash
-      when: true
+  roles:
+    - install_node
+    - generate_env
+    - install_project

@@ -1,0 +1,6 @@
+---
+- name: Generate .env file from template
+  template:
+    src: ".env.j2"        # our Jinja2 template file (see below)
+    dest: "{{ repo_dest }}/.env"  # places the generated .env into your repo directory
+    mode: '0644'
