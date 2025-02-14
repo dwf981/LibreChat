@@ -1,13 +1,12 @@
 ---
 - name: Install dependencies, build Node project, and run index.js
   shell: |
-    if [ ! -f "{{ repo_dest }}/.env" ]; then
+    if [ ! -f "{{ repo_dest }}/node_modules" ]; then
       echo "Installing dependencies ..."
       cd "{{ repo_dest }}" || exit 1
-      yarn install || exit 1
-      yarn install --frozen-lockfile || exit 1
-      echo "Copying .env file..."
-      if [ ! -f .env ]; then cp .env.example .env; fi
+      npm install || exit 1
+      npm ci || exit 1
+      npm run frontend || exit 1
       echo "Copying librechat.yaml file..."
       if [ ! -f librechat.yaml ]; then cp librechat.example.yaml librechat.yaml; fi
       echo ""
