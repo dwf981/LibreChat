@@ -1,4 +1,10 @@
 ---
+# Added task to ensure that repo_dest exists before templating the .env file.
+- name: Ensure repository directory exists
+  file:
+    path: "{{ repo_dest }}"
+    state: directory
+
 - name: Generate .env file from template
   template:
     src: ".env.j2"        # our Jinja2 template file (see below)

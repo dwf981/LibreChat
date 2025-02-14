@@ -9,7 +9,7 @@
     repo_name: "{{ repo_url | regex_replace('.*\/([^/]+?)(\\.git)?$', '\\1') }}"
     repo_dest: "{{ ansible_env.HOME }}/{{ repo_name }}"
 
-  tasks:
+  pre_tasks:
     - name: Display repository info feedback
       debug:
         msg: |
