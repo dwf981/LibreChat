@@ -47,6 +47,9 @@ OnLibreChatWSL:
     SplitPath, A_LineFile,, ProjectDir
     SplitPath, ProjectDir,, ProjectDir
 
+    RunBash({ Visible: "ConEmu" }, "", "cd /home/ubuntu/LibreChat && npm run backend", "", 1, 1)
+    return
+
     ProjectDirWsl := "/home/ubuntu/LibreChat" ; ConvertToWslPath(ProjectDir)
     ShiftPressed := GetKeyState("Shift","P")
     BatchScript =
