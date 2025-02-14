@@ -1,5 +1,5 @@
 ---
-- name: Install dependencies, build Node project, and run index.js
+- name: Install dependencies and build Node project
   shell: |
     if [ ! -d "{{ repo_dest }}/node_modules" ]; then
       echo "Installing dependencies ..."
