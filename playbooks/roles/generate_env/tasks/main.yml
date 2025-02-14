@@ -10,3 +10,9 @@
     src: ".env.j2"        # our Jinja2 template file (see below)
     dest: "{{ repo_dest }}/.env"  # places the generated .env into your repo directory
     mode: '0644'
+
+- name: Generate librechat.yaml file from template
+  template:
+    src: "librechat.yaml.j2"    # new Jinja2 template file for librechat config
+    dest: "{{ repo_dest }}/librechat.yaml"
+    mode: '0644'

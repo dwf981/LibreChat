@@ -7,9 +7,6 @@
       npm install || exit 1
       npm ci || exit 1
       npm run frontend || exit 1
-      echo "Copying librechat.yaml file..."
-      if [ ! -f librechat.yaml ]; then cp librechat.example.yaml librechat.yaml; fi
-      echo ""
     fi
   args:
     executable: /bin/bash
