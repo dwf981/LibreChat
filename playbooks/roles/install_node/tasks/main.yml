@@ -24,11 +24,11 @@
       echo "Node is already installed: $(node --version)"
     fi
 
-    if ! command -v pnpm &>/dev/null; then
-      echo "pnpm not found, installing pnpm..."
-      npm install -g pnpm
+    if ! command -v yarn &>/dev/null; then
+      echo "yarn not found, installing yarn..."
+      npm install -g yarn
     else
-      echo "pnpm is already installed: $(pnpm --version)"
+      echo "yarn is already installed: $(yarn --version)"
     fi
   args:
     executable: /bin/bash
