@@ -1,7 +1,7 @@
 ---
 - name: Install dependencies, build Node project, and run index.js
   shell: |
-    if [ ! -f "{{ repo_dest }}/node_modules" ]; then
+    if [ ! -d "{{ repo_dest }}/node_modules" ]; then
       echo "Installing dependencies ..."
       cd "{{ repo_dest }}" || exit 1
       npm install || exit 1
