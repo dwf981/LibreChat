@@ -46,8 +46,25 @@ OnLibreChatWSL:
     ProjectDir := GetProjectDir()
     SplitPath, A_LineFile,, ProjectDir
     SplitPath, ProjectDir,, ProjectDir
+    SplitPath, ProjectDir, ProjectName
+    BatchScript =
+    (
 
-    RunBash({ Visible: "ConEmu" }, "", "cd /home/ubuntu/LibreChat && npm run backend", "", 1, 1)
+        echo !yellow!Starting %ProjectName%...!nc!
+        start "" "http://localhost:3080"
+    )
+    BashScript =
+    (
+
+        if ps aux | grep "node /home/ubuntu/LibreChat" | grep -v grep >/dev/null 2>&1; then
+            echo "LibreChat is already running."
+        else
+            cd /home/ubuntu/LibreChat
+            npm run backend
+        fi
+    )
+    Options := { Visible: "ConEmu", Colors: true }
+    RunBash( Options, StripBat(BatchScript), StripBat(BashScript), "", 1, 1 )
     return
 
     ProjectDirWsl := "/home/ubuntu/LibreChat" ; ConvertToWslPath(ProjectDir)
