@@ -109,10 +109,10 @@ mcpServers:
     args:
       - --repository
       - "/home/ubuntu/MCPServers"
-#  github:
-#    type: stdio
-#    command: node
-#    args:
-#      - /home/ubuntu/MCPServers/src/github/dist/index.js
-#    env:
-#      GITHUB_PERSONAL_ACCESS_TOKEN: "{{ lookup('env', 'GITHUB_PERSONAL_ACCESS_TOKEN') }}"
+  github:
+    type: stdio
+    command: /mnt/c/Users/Tavi/.config/nvm/versions/node/v22.14.0/bin/node
+    args:
+      - /home/ubuntu/MCPServers/src/github/dist/index.js
+    env:
+      GITHUB_PERSONAL_ACCESS_TOKEN: "{{ lookup('env', 'GITHUB_PERSONAL_ACCESS_TOKEN') }}"
