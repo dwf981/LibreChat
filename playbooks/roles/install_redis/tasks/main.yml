@@ -1,0 +1,25 @@
+---
+- block:
+    - name: Update and upgrade packages
+      apt:
+        upgrade: dist
+        update_cache: yes
+  
+    - name: Check if Redis is installed
+      command: redis-server --version
+      register: redis_check
+      ignore_errors: true
+
+    - name: Install Redis server if not present
+      apt:
+        name: redis-server
+        state: latest
+        update_cache: yes
+      when: redis_check.rc != 0
+
+    - name: Ensure Redis service is running and enabled
+      service:
+        name: redis-server
+        state: started
+        enabled: yes
+  become: true

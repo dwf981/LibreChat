@@ -1,29 +1,37 @@
-# INPUT_VARIABLES: "REPO_URL", "MONGO_URL", "ANTHROPIC_API_KEY", "GEMINI_API_KEY", "OPENAI_API_KEY", "DEEPSEEK_API_KEY", "GROQ_API_KEY", "GH_TOKEN", "GITHUB_PERSONAL_ACCESS_TOKEN"
+# INPUT_VARIABLES: "ANSIBLE_BECOME_PASS", "REPO_URL", "MONGO_URL", "ANTHROPIC_API_KEY", "GEMINI_API_KEY", "OPENAI_API_KEY", "DEEPSEEK_API_KEY", "GROQ_API_KEY", "GH_TOKEN", "GITHUB_PERSONAL_ACCESS_TOKEN"
 ---
 - name: Install
   hosts: localhost
   connection: local
-
+  become: false
   vars:
+    user: ubuntu
     repo_url: "{{ lookup('env', 'REPO_URL') }}"
     repo_name: "{{ repo_url | regex_replace('.*\/([^/]+?)(\\.git)?$', '\\1') }}"
-    repo_dest: "{{ ansible_env.HOME }}/{{ repo_name }}"
-
+    repo_dest: "/home/{{ user }}/{{ repo_name }}"
   pre_tasks:
     - name: Display repository info feedback
       debug:
         msg: |
           Repository URL: {{ repo_url }}
           Repository name: {{ repo_name }}
-          Home Directory: {{ ansible_env.HOME }}
+          Home Directory: {{ repo_dest }}
+
+    - name: Ensure GitHub is in known_hosts
+      known_hosts:
+        path: "/home/{{ user }}/.ssh/known_hosts"
+        name: github.com
+        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
 
     - name: Clone or update repository
       git:
         repo: "{{ repo_url }}"
         dest: "{{ repo_dest }}"
         update: yes
+        key_file: "/home/{{ user }}/.ssh/id_rsa"
 
   roles:
     - install_node
     - generate_env
     - install_project
+    - install_redis
