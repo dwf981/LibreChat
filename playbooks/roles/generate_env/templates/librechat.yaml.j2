@@ -83,6 +83,7 @@ actions:
 mcpServers:
   everything:
     url: http://localhost:3001/sse
+    command: mcp-server-everything
   puppeteer:
     type: stdio
     command: npx
@@ -90,10 +91,8 @@ mcpServers:
       - -y
       - "@modelcontextprotocol/server-puppeteer"
   filesystem:
-    command: npx
+    command: mcp-server-filesystem
     args:
-      - -y
-      - "@modelcontextprotocol/server-filesystem"
       - /home/ubuntu
       - /mnt/c
     iconPath: /home/ubuntu/LibreChat/client/public/assets/logo.svg
