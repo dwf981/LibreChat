@@ -96,9 +96,11 @@ mcpServers:
       - /home/ubuntu
       - /mnt/c
     iconPath: /home/ubuntu/LibreChat/client/public/assets/logo.svg
-  mcp-obsidian:
-    command: npx
-    args:
-      - -y
-      - "mcp-obsidian"
-      - /home/ubuntu/obsidian-vault
+#  mcp-obsidian:
+#    command: npx
+#    args:
+#      - -y
+#      - "mcp-obsidian"
+#      - /mnt/c/Users/Tavi/Obsidian/Obsidian
+#    env:
+#      OBSIDIAN_API_KEY: "{{ lookup('env', 'OBSIDIAN_API_KEY') }}"
