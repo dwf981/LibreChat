@@ -86,10 +86,9 @@ mcpServers:
     command: mcp-server-everything
   puppeteer:
     type: stdio
-    command: npx
+    command: mcp-server-puppeteer
     args:
-      - -y
-      - "@modelcontextprotocol/server-puppeteer"
+      - .
   filesystem:
     command: mcp-server-filesystem
     args:
