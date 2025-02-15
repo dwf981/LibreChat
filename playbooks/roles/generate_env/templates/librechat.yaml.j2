@@ -26,7 +26,7 @@ interface:
 
       *Effective Date: February 18, 2024*
 
-      Welcome to LibreChat, the informational website for the open-source AI chat platform, available at https://librechat.ai. These Terms of Service ("Terms") govern your use of our website and the services we offer. By accessing or using the Website, you agree to be bound by these Terms and our Privacy Policy, accessible at https://librechat.ai/privacy.
+      Welcome to LibreChat, the informational website for the open-source AI chat platform, available at https://librechat.ai. These Terms of Service ("Terms") govern your use of our website and the services we offer. By accessing or using the Website, you agree to be bound by these Terms and our Privacy Policy, accessible at https://librechat.ai//privacy.
 
       ## 1. Ownership
 
@@ -103,3 +103,16 @@ mcpServers:
 #      - /mnt/c/Users/Tavi/Obsidian/Obsidian
 #    env:
 #      OBSIDIAN_API_KEY: "{{ lookup('env', 'OBSIDIAN_API_KEY') }}"
+  git:
+    type: stdio
+    command: /home/ubuntu/MCPServers/src/git/.venv/bin/mcp-server-git
+    args:
+      - --repository
+      - "/home/ubuntu/MCPServers"
+#  github:
+#    type: stdio
+#    command: node
+#    args:
+#      - /home/ubuntu/MCPServers/src/github/dist/index.js
+#    env:
+#      GITHUB_PERSONAL_ACCESS_TOKEN: "{{ lookup('env', 'GITHUB_PERSONAL_ACCESS_TOKEN') }}"
