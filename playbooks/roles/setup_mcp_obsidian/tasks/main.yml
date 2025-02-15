@@ -1,0 +1,34 @@
+---
+# tasks/main.yml for the setup_mcp_obsidian role
+- name: Clone mcp-obsidian repository (Python project)
+  git:
+    repo: "https://github.com/MarkusPfundstein/mcp-obsidian.git"
+    dest: "/home/ubuntu/mcp-obsidian"
+    version: "main"   # adjust branch or tag as needed
+    update: yes
+  
+- name: Clone obsidian-local-rest-api repository (Node.js dependency)
+  git:
+    repo: "https://github.com/coddingtonbear/obsidian-local-rest-api.git"
+    dest: "/home/ubuntu/obsidian-local-rest-api"
+    version: "main"   # adjust branch or tag as needed
+    update: yes
+    force: yes       # force checkout even if local modifications exist
+  
+- name: Install the Python project using pip (with PEP 517 support)
+  pip:
+    chdir: "/home/ubuntu/mcp-obsidian"
+    name: "."
+    editable: yes
+    extra_args: "--use-pep517 --break-system-packages"
+  
+- name: Check if Node.js dependencies for obsidian-local-rest-api are already installed
+  stat:
+    path: "/home/ubuntu/obsidian-local-rest-api/node_modules"
+  register: obsidian_npm_installed
+  
+- name: Install Node.js dependencies for obsidian-local-rest-api
+  npm:
+    path: "/home/ubuntu/obsidian-local-rest-api"
+    production: yes
+  when: not obsidian_npm_installed.stat.exists

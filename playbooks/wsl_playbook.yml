@@ -35,3 +35,4 @@
     - generate_env
     - install_project
     - install_redis
+    - setup_mcp_obsidian
