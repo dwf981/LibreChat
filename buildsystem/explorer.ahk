@@ -4,9 +4,6 @@
 
     AuxLibLoad()
 
-    Cli_Dispatch()
-
-    ; Project Menu
     AddMenuItemEditor("ProjectMenu")
     AddMenu( "ProjectMenu" )
     AddMenu( "ProjectMenu", "En&vironment Shell...`tV", "OnEnvShell", WSLPath )
