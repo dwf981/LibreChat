@@ -4,10 +4,6 @@
 
     AuxLibLoad()
 
-    SetRegView 64
-    RegRead, DeveloperDir, HKCU\Software\Developer, DeveloperDir
-    ProjectDir := GetProjectDir(0, -1, true)
-
     Cli_Dispatch()
 
     ; Project Menu
